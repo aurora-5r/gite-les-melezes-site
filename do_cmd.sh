@@ -6,7 +6,8 @@ WORKING_DIR="$(pwd)"
 
 MY_DIR="$(cd "$(dirname "$0")" && pwd)"
 pushd "${MY_DIR}" &>/dev/null || exit 1
-URL_PREPROD=3.20.47.46
+#URL_PREPROD=3.20.47.46
+DOC_FOLDER_PROD="docs_from_gdrive"
 
 
 function log {
@@ -147,24 +148,20 @@ function verbose_copy {
 
 
 function copy_doc {
-    for folder in $(ls -tp documents_archive/|tail -n +6) ; do
-        rm -rf documents_archive/${folder}
-    done
-    last_version=$(find documents_archive/ -maxdepth 1 -printf "%T@ %Tc %p\n"  | sort -n|cut -s -d "/" -f 2|tail -2|head -1)
-    log "copy_doc, last version ${last_version}"
     
-    for collection in documents_archive/${last_version}/lesite/* ; do
-        
+    
+    
+    for collection in ${DOC_FOLDER_PROD}/gitelesmelezesfr/* ; do
         # Process directories only,
         if [ ! -d "${collection}" ]; then
             continue;
         fi
-        
         collection_name="$(basename -- "${collection}")"
+        mkdir -p "site-content/src/${collection_name}/"
         find  "site-content/src/${collection_name}/"  -type f -name '*.md' -delete
+        find  "site-content/src/${collection_name}/"  -type f -name '*.png' -delete
+        
         verbose_copy "${collection}/." "site-content/src/${collection_name}"
-        
-        
         
     done
 }
@@ -178,9 +175,9 @@ function build_site {
 }
 function build_doc {
     log "Building doc from gdrive"
+    rm -rf "${DOC_FOLDER_PROD}/*"
     
-    VERSION=$(date +'%Y.%m.%d.%H.%M.%S')
-    python -m gstomd --folder_id "1tCePQjV2eTcujCMng7myQ7R5UhU_bbtC"  --dest "documents_archive/${VERSION}" --config "conf/pydrive_settings.yaml"
+    python -m gstomd --folder_id "1tCePQjV2eTcujCMng7myQ7R5UhU_bbtC"  --dest "${DOC_FOLDER_PROD}" --config "conf/pydrive_settings.yaml"
     
 }
 
