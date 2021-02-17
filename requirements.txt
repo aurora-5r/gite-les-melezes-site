@@ -1,6 +1,6 @@
-pandas==1.1.4
+pandas
 GsuiteToMd
-google-auth==1.23.0
-json5==0.9.5
-jsonschema==3.2.0
+google-auth
+json5
+jsonschema
 
