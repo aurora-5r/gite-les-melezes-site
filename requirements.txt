@@ -3,4 +3,5 @@ GsuiteToMd
 google-auth
 json5
 jsonschema
+pathlib
 
