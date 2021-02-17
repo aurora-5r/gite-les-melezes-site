@@ -95,7 +95,7 @@ module.exports = function (eleventyConfig) {
             .reverse();
     });
     eleventyConfig.addCollection("slides", (collection) => {
-        return collection.getFilteredByGlob("./src/slides/**/*.md").reverse();
+        return collection.getFilteredByGlob("./src/slides/**/*.md");
     });
     eleventyConfig.addCollection("bios", (collection) => {
         return collection.getFilteredByGlob("./src/bios/**/*.md").reverse();

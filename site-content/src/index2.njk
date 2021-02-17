@@ -6,13 +6,7 @@ layout: "layouts/base.njk"
         <h1 class="font-weight-semibold">
             {{ metadata.metadata.name }}
         </h1>
-        <h6 class="font-weight-normal text-muted pb-3">{{ metadata.metadata.subtile }}</h6>
-
-    </div>
-</div>
-
-<div class="content-wrapper">
-    <div class="container">
+        <h6 class="font-weight-normal text-muted pb-3">{{ metadata.metadata.subtitle }}</h6>
         <section class="customer-feedback" id="feedback-section">
             <div class="row">
 
@@ -20,10 +14,10 @@ layout: "layouts/base.njk"
                     {% for slide in collections.slides %}
 
                         <div >
-                            <img src="slide.data.cover" class="d-block w-100" alt="..."/>
+                            <img src="{{slide.url}}/images/{{ slide.data.cover }}" class="d-block w-100" alt="..."/>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>{ slide.data.title }</h5>
-                                <p>{ slide.data.text }</p>
+                                <h5>{{ slide.data.title }}</h5>
+                                <p>{{ slide.data.text }}</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -31,6 +25,12 @@ layout: "layouts/base.njk"
                 </div>
             </div>
         </section>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="container">
+
         <section class="features-overview" id="features-section">
             <div class="content-header">
                 <h2>How does it works</h2>
