@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const livePosts = (p) => p.date <= now && !p.data.draft;
 const now = new Date();
+const isProduction = process.env.NODE_ENV === `production`;
+const pathPrefix = isProduction ? `` : `.`;
 
 const manifestPath = path.resolve(__dirname, "dist", "scripts", "webpack.json");
 const manifest = JSON.parse(
@@ -73,13 +75,12 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addShortcode("bundledCss", function () {
         return manifest["main"]["css"]
-            ? `<link href="${manifest["main"]["css"]}" rel="stylesheet" />`
+            ? `<link href="${pathPrefix}${manifest["main"]["css"]}  " rel="stylesheet" />`
             : "";
     });
-
     eleventyConfig.addShortcode("bundledJs", function () {
         return manifest["main"]["js"]
-            ? `<script src="${manifest["main"]["js"]}" async></script>`
+            ? `<script src="${pathPrefix}${manifest["main"]["js"]}" async></script>`
             : "";
     });
     eleventyConfig.addCollection("posts", (collection) => {
@@ -105,5 +106,6 @@ module.exports = function (eleventyConfig) {
             input: "src",
             output: "dist",
         },
+        pathPrefix: isProduction ? `/` : `/gitelesmelezes/`,
     };
 };
