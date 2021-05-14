@@ -14,7 +14,7 @@ drive = GoogleDrive(gauth)
 
 # PUT YOUR FILE ID AND ANY-NAME HERE
 file_id = '1ERRCrr1lLqY65wR31CYfpGhBolYMnTjGukLWm03E1sA'
-file_name = 'metadata.xlsx'
+file_name = 'metadata2.xlsx'
 # Get contents of your drive file into the desired file. Here contents are stored in the file specified by 'file_name'
 downloaded = drive.CreateFile({'id': file_id})
 downloaded.GetContentFile(
@@ -22,6 +22,10 @@ downloaded.GetContentFile(
 df = pd.read_excel(file_name, usecols=None,
                    sheet_name="v1", engine='openpyxl')
 
-
 df.set_index("id").rename(columns={"value": 'metadata'}).to_json(
     'site-content/src/_data/metadata.json')
+df = pd.read_excel(file_name, usecols=None,
+                   sheet_name="menus", engine='openpyxl')
+
+df.set_index("lang").to_json(
+    'site-content/src/_data/mainnav.json')

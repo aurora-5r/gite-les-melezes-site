@@ -286,7 +286,9 @@ footer {
         }
     }
 }
-
+.carousel-caption {
+ background: rgba(0, 0, 0, 0.35);
+}
 //CONTAINER
 .container {
     @media (max-width: 575px) {

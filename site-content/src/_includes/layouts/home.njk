@@ -1,0 +1,36 @@
+{% extends "layouts/base.njk" %}
+{% block content %}
+    <div class="banner">
+        <div class="container">
+            <h1 class="font-weight-semibold">
+                {{ metadata.metadata.name }}
+            </h1>
+            <h6 class="font-weight-normal text-muted pb-3">{{ metadata.metadata.subtitle }}</h6>
+            <section class="customer-feedback" id="feedback-section">
+                <div class="row">
+                    <div class="owl-carousel owl-theme grid-margin">
+                        {% set slides = collections["slides_" + locale] %}
+                        {% for slide in slides %}
+                            <div>
+                                {% set imageurl = slide.url + "/images/image1.png" %}
+                                <img src="{{ imageurl |url }}" class="d-block w-100" alt="..."/>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3>
+                                        {{ slide.data.title }}
+                                    </h3>
+                                    <h5>{{ slide.data.text }}</h5>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="container">
+            <section class="features-overview" id="features-section">
+                {{ content | safe }}
+            </div>
+        </div>
+    {% endblock content %}

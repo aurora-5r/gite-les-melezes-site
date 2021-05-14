@@ -116,7 +116,7 @@ function build_pages {
     RELEASE=$1
     log "Building pages for ${RELEASE}"
     copy_doc ${RELEASE}
-    rm -rf dist
+    run_command "site-content/"  rm -rf dist
     if [[ "${RELEASE}" == "preproduction" ]]; then
         run_command "site-content/" npm run  dev
     else
@@ -199,7 +199,7 @@ function copy_doc {
     log "copy_doc for ${RELEASE}"
     
     
-    for collection in ${DOC_FOLDER_PROD}/production/* ; do
+    for collection in ${DOC_FOLDER_PROD}/gitelesmelezesfr/* ; do
         # Process directories only,
         if [ ! -d "${collection}" ]; then
             continue;

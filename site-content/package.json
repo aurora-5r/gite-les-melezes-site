@@ -10,7 +10,7 @@
         "build:eleventy": "cross-env NODE_ENV=production node src/scripts/generate-responsive-imgs && NODE_ENV=production eleventy",
         "build:webpack": "webpack --config webpack.prod.js",
         "dev": "cross-env NODE_ENV=development  $npm_execpath run dev:webpack && $npm_execpath run dev:eleventy",
-        "dev:eleventy": "eleventy",
+        "dev:eleventy": " eleventy",
         "dev:webpack": "webpack --config webpack.dev.js",
         "lint": "run-p lint:**",
         "lint:css": "stylelint \"site/assets/scss/**/*.scss\"",

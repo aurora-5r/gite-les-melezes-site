@@ -1,0 +1,10 @@
+{% set content = collections["pages_" + locale] %}
+{% set newmainnav = content | eleventyNavigation("main") %}
+
+{%- for nav in  newmainnav -%}
+  <li>
+    <a class="nav-link" href="{{ nav.url | url }}">
+      {{ nav.title }}</a>
+  </li>
+
+{%- endfor -%}

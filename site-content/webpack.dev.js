@@ -11,6 +11,7 @@ module.exports = merge(common, {
   output: {
     filename: "[name].js",
     chunkFilename: "chunk-[id].js",
+    publicPath: "/gitelesmelezes/scripts",
   },
 
   devServer: {

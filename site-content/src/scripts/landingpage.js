@@ -26,7 +26,7 @@ $(".owl-carousel").owlCarousel({
     items: 3,
     loop: true,
     nav: false,
-    dot: true,
+    dots: false,
     autoplay: true,
     slideTransition: "linear",
     autoplayHoverPause: true,

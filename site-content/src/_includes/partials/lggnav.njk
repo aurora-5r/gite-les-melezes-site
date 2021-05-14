@@ -1,0 +1,18 @@
+{% for lgg in languages %}
+  {# set translatedUrl to the homepage of that language by default #}
+  {% set translatedUrl = "/" + lgg.code + "/" %}
+  {# set current language class #}
+  {% set activeClass = "is-active" if lgg.code == locale else "" %}
+  {# loop through all the content of the site #}
+  {% for item in collections.all %}
+    {# check matches #}
+    {% if item.data.translationKey == translationKey and item.data.locale == lgg.code %}
+      {% set translatedUrl = item.url %}
+    {% endif %}
+  {% endfor %}
+  {% if lgg.code != locale %}
+    <li>
+      <a class="{{ activeClass }}" href="{{ translatedUrl |url }}">{{ lgg.label }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
